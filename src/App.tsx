@@ -1,9 +1,12 @@
-import { useMemo } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container, Theme } from './settings/types';
 import { HeroLandingPage } from './components/generated/HeroLandingPage';
+import { ServicesPage } from './components/ServicesPage';
+import { IndustriesPage } from './components/IndustriesPage';
+import { CaseStudiesPage } from './components/CaseStudiesPage';
+import { PharmaIndustryPage } from './components/PharmaIndustryPage';
 
 const theme: Theme = 'light';
-// only use 'centered' container for standalone components, never for full page apps or websites.
 const container: Container = 'none';
 
 function App() {
@@ -17,20 +20,17 @@ function App() {
 
   setTheme(theme);
 
-  const generatedComponent = useMemo(() => {
-    // THIS IS WHERE THE TOP LEVEL GENRATED COMPONENT WILL BE RETURNED!
-    return <HeroLandingPage />; // %EXPORT_STATEMENT%
-  }, []);
-
-  if (container === 'centered') {
-    return (
-      <div className="h-full w-full flex flex-col items-center justify-center">
-        {generatedComponent}
-      </div>
-    );
-  } else {
-    return generatedComponent;
-  }
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HeroLandingPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/industries" element={<IndustriesPage />} />
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/industries/pharma" element={<PharmaIndustryPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
