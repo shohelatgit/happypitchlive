@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Building2, Timer, Award, BarChart3, Shield, Users, Menu, X, Search, Lightbulb, Palette, Linkedin, Instagram } from 'lucide-react';
 import { useResponsive } from '@/hooks/use-media-query';
 
@@ -259,10 +260,9 @@ export const HeroLandingPage = () => {
             gap: '16px',
             alignItems: 'center'
           }}>
-              <NavItem active onClick={scrollToTop}>Home</NavItem>
-              <NavItem>Who we serve</NavItem>
-              <NavItem>Solutions</NavItem>
-              <NavItem>Resources</NavItem>
+              <Link to="/" onClick={scrollToTop} style={{ textDecoration: 'none', color: COLORS.black }}><NavItem active>Home</NavItem></Link>
+              <Link to="/industries" style={{ textDecoration: 'none', color: COLORS.grayText }}><NavItem>Industries</NavItem></Link>
+              <Link to="/services" style={{ textDecoration: 'none', color: COLORS.grayText }}><NavItem>Services</NavItem></Link>
             </nav>
 
             <div style={{
@@ -304,10 +304,9 @@ export const HeroLandingPage = () => {
             flexDirection: 'column',
             gap: '8px'
           }}>
-            <NavItem active isMobile onClick={scrollToTop}>Home</NavItem>
-            <NavItem isMobile>Who we serve</NavItem>
-            <NavItem isMobile>Solutions</NavItem>
-            <NavItem isMobile>Resources</NavItem>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none' }}><NavItem active isMobile>Home</NavItem></Link>
+            <Link to="/industries" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none' }}><NavItem isMobile>Industries</NavItem></Link>
+            <Link to="/services" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none' }}><NavItem isMobile>Services</NavItem></Link>
           </nav>
           <div style={{
             display: 'flex',
@@ -364,7 +363,7 @@ export const HeroLandingPage = () => {
           fontFamily: FONTS.inter,
           textTransform: 'capitalize'
         }}>
-            Close More Deals.<br />Faster.
+            Clear Stories That<br />Close Deals
           </h1>
           <p style={{
           margin: 0,
@@ -374,7 +373,7 @@ export const HeroLandingPage = () => {
           fontFamily: FONTS.inter,
           maxWidth: isMobile ? '100%' : '580px'
         }}>
-            Professional pitch decks and deal materials that win capital, close acquisitions, and impress investors.
+            Enable your firm to compete and win across every front with deal-winning narratives that turn complex strategies into capital raises and institutional credibility.
           </p>
           <div style={{
           display: 'flex',
@@ -615,7 +614,7 @@ export const HeroLandingPage = () => {
           marginBottom: isMobile ? '40px' : '64px',
           letterSpacing: isMobile ? '-0.96px' : '-1.68px'
         }}>
-          Why Choose Happy Pitch?
+          Why Choose<br />Happy Pitch?
         </h2>
         
         <div style={{
@@ -697,7 +696,7 @@ export const HeroLandingPage = () => {
         margin: 0,
         textAlign: 'center'
       }}>
-          Chosen By Sophisticated Businesses
+          Chosen By Sophisticated<br />Businesses
         </h2>
         <div style={{
         display: 'flex',
@@ -708,9 +707,9 @@ export const HeroLandingPage = () => {
         gap: isMobile ? '40px' : '0'
       }}>
           {[
-            { value: '$500M', label: 'Capital Represented in Client Projects' },
-            { value: '200+', label: 'Pitch Decks and Deal Books Delivered' },
-            { value: '98%', label: 'Client Retention Rate Year Over Year' }
+            { value: '$100B+', label: 'Capital Raised by Clients' },
+            { value: '500+', label: 'Deals Supported' },
+            { value: '100%', label: 'Founder-Led Execution' }
           ].map((metric, i) => <div key={i} style={{
           textAlign: 'center',
           display: 'flex',
@@ -750,13 +749,13 @@ export const HeroLandingPage = () => {
           fontSize: isMobile ? '24px' : '36px',
           fontWeight: 700,
           margin: 0
-        }}>Turn Complex Strategies Into Presentations That Close Deals</h2>
+        }}>Turn Complex Strategies Into Presentations<br />That Close Deals</h2>
           <p style={{
           fontSize: isMobile ? '16px' : '18px',
           color: COLORS.grayText,
           margin: 0
         }}>
-            Real estate funds that closed billion-dollar acquisitions. Private equity firms that raised oversubscribed funds... When the stakes are high, sophisticated firms choose materials that actually work.
+            Real estate funds that closed billion-dollar acquisitions. Private equity firms that raised oversubscribed funds. Hedge funds that won institutional mandates. When the stakes are high, sophisticated firms choose materials that actually work.
           </p>
         </div>
 
@@ -944,7 +943,7 @@ export const HeroLandingPage = () => {
           lineHeight: isMobile ? '36px' : isTablet ? '48px' : '67.2px',
           margin: 0
         }}>
-            Your Next Deal Starts With Better Collateral
+            Your Next Raise Starts<br />With a Better Deck
           </h2>
           <p style={{
           color: COLORS.grayText,
@@ -952,7 +951,7 @@ export const HeroLandingPage = () => {
           lineHeight: isMobile ? '22px' : '26.6px',
           margin: 0
         }}>
-            Great strategies get overlooked when they're not presented the right way. Don't let weak communication cost you the allocation.
+            Great strategies deserve great storytelling. Don't let a weak deck cost you your next allocation.
           </p>
           <ActionButton variant="secondary" isMobile={isMobile} onClick={() => handleButtonClick('Book Consultation')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/08f484d3-ab85-46a5-a080-318ab29fa9f3.svg">
             Book Consultation
@@ -996,7 +995,7 @@ export const HeroLandingPage = () => {
           lineHeight: '19.4px',
           margin: 0
         }}>
-            Happy Pitch provides financial communications advisory services for finance firms.
+            Happy Pitch provides<br />financial communication<br />for leading firms.
           </p>
           <div style={{
           display: 'flex',
@@ -1033,10 +1032,9 @@ export const HeroLandingPage = () => {
           flexDirection: 'column',
           gap: '12px'
         }}>
-            <NavItem active isMobile={isMobile} onClick={scrollToTop}>Home</NavItem>
-            <NavItem isMobile={isMobile}>Who we serve</NavItem>
-            <NavItem isMobile={isMobile}>Solutions</NavItem>
-            <NavItem isMobile={isMobile}>Resources</NavItem>
+            <Link to="/" style={{ textDecoration: 'none' }}><NavItem active isMobile={isMobile}>Home</NavItem></Link>
+            <Link to="/industries" style={{ textDecoration: 'none' }}><NavItem isMobile={isMobile}>Industries</NavItem></Link>
+            <Link to="/services" style={{ textDecoration: 'none' }}><NavItem isMobile={isMobile}>Services</NavItem></Link>
           </div>
           <div style={{
           display: 'flex',
