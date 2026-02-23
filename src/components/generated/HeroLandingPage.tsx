@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Timer, Award, BarChart3, Shield, Users, Menu, X, Search, Lightbulb, Palette, Linkedin, Instagram } from 'lucide-react';
+import { Building2, Timer, Award, BarChart3, Shield, Users, Menu, X, Search, Lightbulb, Palette, Linkedin, Instagram, FileText, Zap, Target } from 'lucide-react';
 import { useResponsive } from '@/hooks/use-media-query';
 
 interface BaseComponentProps {
@@ -117,10 +117,33 @@ const NavItem = ({
     </button>;
 };
 export const HeroLandingPage = () => {
-  const [activeTab, setActiveTab] = useState('Transaction Readiness');
+  const [activeTab, setActiveTab] = useState('Fundraising');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [industriesDropdownOpen, setIndustriesDropdownOpen] = useState(false);
   const { isMobile, isTablet } = useResponsive();
-  const tabs = ['Transaction Readiness', 'Investor Relations', 'Business Development', 'Strategic Positioning'];
+  const tabs = ['Fundraising', 'M&A Advisory', 'Investor Communications', 'Growth & Sales'];
+
+  const industriesList = [
+    { label: 'Pharmaceuticals', slug: 'pharma' },
+    { label: 'Biotechnology', slug: 'biotech' },
+    { label: 'Private Equity', slug: 'private-equity' },
+    { label: 'Private Credit', slug: 'private-credit' },
+    { label: 'Venture Capital', slug: 'venture-capital' },
+    { label: 'Family Office', slug: 'family-office' },
+    { label: 'Digital Transformation', slug: 'digital-transformation' },
+    { label: 'Food & Beverages', slug: 'food-beverages' },
+    { label: 'SaaS', slug: 'saas' },
+    { label: 'CPG', slug: 'cpg' },
+  ];
+
+  const servicesList = [
+    { label: 'Corporate Presentations', slug: 'corporate-presentation' },
+    { label: 'Pitch Decks', slug: 'pitch-decks' },
+    { label: 'Investor Memos', slug: 'investor-memos' },
+    { label: 'CIMs', slug: 'cims' },
+    { label: 'Sales Decks', slug: 'sales-decks' },
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -131,12 +154,12 @@ export const HeroLandingPage = () => {
   };
 
   const featureIcons = [
-    { icon: Building2, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
-    { icon: Timer, color: '#f97316', bgColor: 'rgba(249, 115, 22, 0.1)' },
-    { icon: Award, color: '#a855f7', bgColor: 'rgba(168, 85, 247, 0.1)' },
+    { icon: FileText, color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
     { icon: BarChart3, color: '#22c55e', bgColor: 'rgba(34, 197, 94, 0.1)' },
+    { icon: Users, color: '#a855f7', bgColor: 'rgba(168, 85, 247, 0.1)' },
     { icon: Shield, color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.1)' },
-    { icon: Users, color: '#14b8a6', bgColor: 'rgba(20, 184, 166, 0.1)' }
+    { icon: Zap, color: '#f97316', bgColor: 'rgba(249, 115, 22, 0.1)' },
+    { icon: Target, color: '#14b8a6', bgColor: 'rgba(20, 184, 166, 0.1)' }
   ];
 
   const pillarIcons = [
@@ -145,70 +168,95 @@ export const HeroLandingPage = () => {
     { icon: Palette, color: '#a855f7', bgColor: 'rgba(168, 85, 247, 0.1)' }
   ];
 
-  const solutionImages = [
-    '/solution-1.jpg',
-    '/solution-2.jpg',
-    '/solution-3.jpg',
-    '/solution-4.jpg'
-  ];
-
-  const contentByTab: Record<string, { title: string; desc: string }[]> = {
-    'Transaction Readiness': [
-      {
-        title: 'Investment Memorandums',
-        desc: 'Deal books that secure funding and close acquisitions by presenting clear investment cases backed by data and strategic rationale.'
-      },
-      {
-        title: 'Management Presentations',
-        desc: 'Executive pitch decks that drive M&A processes by articulating company value, market position, and growth potential.'
-      },
-      {
-        title: 'Company Profiles',
-        desc: 'Strategic overviews that position firms for sale, partnership, or investment by highlighting competitive advantages and value drivers.'
-      }
-    ],
-    'Investor Relations': [
-      {
-        title: 'Quarterly Reports',
-        desc: 'Comprehensive performance updates that keep investors informed, engaged, and confident in your execution capabilities.'
-      },
-      {
-        title: 'Annual General Meeting Decks',
-        desc: 'Impactful presentations for AGMs that highlight year-over-year growth, strategic wins, and future roadmap.'
-      },
-      {
-        title: 'LP Communications',
-        desc: 'Regular, transparent updates for Limited Partners that build long-term trust and facilitate future fundraising.'
-      }
-    ],
-    'Business Development': [
-      {
-        title: 'Sales Enablement Decks',
-        desc: 'High-converting presentation materials that arm your sales team with consistent, persuasive messaging for prospects.'
-      },
-      {
-        title: 'Partnership Proposals',
-        desc: 'Tailored decks designed to secure strategic alliances, joint ventures, and distribution agreements.'
-      },
-      {
-        title: 'Capability Statements',
-        desc: 'Concise overviews of your firm’s expertise and track record, used to win competitive tenders and RFPs.'
-      }
-    ],
-    'Strategic Positioning': [
-      {
-        title: 'Brand Messaging Frameworks',
-        desc: 'Core narrative documents that define your value proposition, mission, and voice across all communication channels.'
-      },
-      {
-        title: 'Website Copy & Content',
-        desc: 'Compelling digital content that aligns your public face with your internal strategy and investor story.'
-      },
-      {
-        title: 'Thought Leadership',
-        desc: 'White papers and articles that establish your firm’s principals as industry experts and visionaries.'
-      }
-    ]
+  const tabContent: Record<string, { title: string; image: string; link: string; sections: { subtitle: string; description: string; link: string }[] }> = {
+    'Fundraising': {
+      title: 'Fundraising',
+      image: '/solution-1.jpg',
+      link: '/services/pitch-decks',
+      sections: [
+        {
+          subtitle: 'Pitch Decks',
+          description: 'Investor-ready decks that tell your equity story with data, design, and conviction. Built to win meetings and close rounds.',
+          link: '/services/pitch-decks',
+        },
+        {
+          subtitle: 'Investor Memos',
+          description: 'LP-facing materials that communicate strategy, track record, and differentiation with institutional polish.',
+          link: '/services/investor-memos',
+        },
+        {
+          subtitle: 'Data Room Presentations',
+          description: 'Structured materials that accelerate due diligence and build investor confidence from the first click.',
+          link: '/services',
+        },
+      ],
+    },
+    'M&A Advisory': {
+      title: 'M&A Advisory',
+      image: '/solution-2.jpg',
+      link: '/services/cims',
+      sections: [
+        {
+          subtitle: 'Confidential Information Memorandums',
+          description: 'Sell-side CIMs that present the full business opportunity with clarity, credibility, and institutional-grade formatting.',
+          link: '/services/cims',
+        },
+        {
+          subtitle: 'Management Presentations',
+          description: 'Executive decks that articulate value, growth levers, and strategic fit for potential buyers and partners.',
+          link: '/services/corporate-presentation',
+        },
+        {
+          subtitle: 'Buyer & Target Profiles',
+          description: 'Concise overviews that position acquisition targets or potential partners effectively for deal teams.',
+          link: '/services',
+        },
+      ],
+    },
+    'Investor Communications': {
+      title: 'Investor Communications',
+      image: '/solution-3.jpg',
+      link: '/services/corporate-presentation',
+      sections: [
+        {
+          subtitle: 'Quarterly Reports',
+          description: 'Polished LP updates that communicate portfolio performance, market outlook, and strategic direction.',
+          link: '/services/investor-memos',
+        },
+        {
+          subtitle: 'Annual Meeting Decks',
+          description: 'Board-ready materials that inform, align, and inspire stakeholder confidence at every level.',
+          link: '/services/corporate-presentation',
+        },
+        {
+          subtitle: 'Earnings & IR Presentations',
+          description: 'Public-facing materials that translate complex financial data into compelling investor narratives.',
+          link: '/services/corporate-presentation',
+        },
+      ],
+    },
+    'Growth & Sales': {
+      title: 'Growth & Sales',
+      image: '/solution-4.jpg',
+      link: '/services/sales-decks',
+      sections: [
+        {
+          subtitle: 'Enterprise Sales Decks',
+          description: 'Persuasive presentations that communicate your value proposition clearly and close deals faster.',
+          link: '/services/sales-decks',
+        },
+        {
+          subtitle: 'Product & Platform Overviews',
+          description: 'Clear, compelling materials that make complex solutions easy to understand for any audience.',
+          link: '/services/sales-decks',
+        },
+        {
+          subtitle: 'Case Studies & Proof Points',
+          description: 'Evidence-backed narratives that build credibility, demonstrate impact, and drive conversion.',
+          link: '/services/sales-decks',
+        },
+      ],
+    },
   };
 
   return <div style={{
@@ -261,8 +309,92 @@ export const HeroLandingPage = () => {
             alignItems: 'center'
           }}>
               <Link to="/" onClick={scrollToTop} style={{ textDecoration: 'none', color: COLORS.black }}><NavItem active>Home</NavItem></Link>
-              <Link to="/industries" style={{ textDecoration: 'none', color: COLORS.grayText }}><NavItem>Industries</NavItem></Link>
-              <Link to="/services" style={{ textDecoration: 'none', color: COLORS.grayText }}><NavItem>Services</NavItem></Link>
+              
+              {/* Industries Dropdown */}
+              <div style={{ position: 'relative' }} onMouseEnter={() => setIndustriesDropdownOpen(true)} onMouseLeave={() => setIndustriesDropdownOpen(false)}>
+                <NavItem>Industries ▾</NavItem>
+                {industriesDropdownOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    paddingTop: '12px',
+                    zIndex: 100
+                  }}>
+                    <div style={{
+                      backgroundColor: COLORS.white,
+                      borderRadius: '12px',
+                      padding: '16px',
+                      width: '200px',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                      border: `1px solid ${COLORS.borderGray}`
+                    }}>
+                      {industriesList.map((item) => (
+                        <Link key={item.slug} to={`/industries/${item.slug}`} style={{ textDecoration: 'none' }}>
+                          <div style={{
+                            padding: '10px 12px',
+                            color: COLORS.grayText,
+                            fontSize: '14px',
+                            fontFamily: FONTS.inter,
+                            cursor: 'pointer',
+                            borderRadius: '8px',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = COLORS.lightGrayBg; e.currentTarget.style.color = COLORS.black; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = COLORS.grayText; }}
+                          >
+                            {item.label}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Services Dropdown */}
+              <div style={{ position: 'relative' }} onMouseEnter={() => setServicesDropdownOpen(true)} onMouseLeave={() => setServicesDropdownOpen(false)}>
+                <NavItem>Services ▾</NavItem>
+                {servicesDropdownOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    paddingTop: '12px',
+                    zIndex: 100
+                  }}>
+                    <div style={{
+                      backgroundColor: COLORS.white,
+                      borderRadius: '12px',
+                      padding: '16px',
+                      width: '200px',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                      border: `1px solid ${COLORS.borderGray}`
+                    }}>
+                      {servicesList.map((item) => (
+                        <Link key={item.slug} to={`/services/${item.slug}`} style={{ textDecoration: 'none' }}>
+                          <div style={{
+                            padding: '10px 12px',
+                            color: COLORS.grayText,
+                            fontSize: '14px',
+                            fontFamily: FONTS.inter,
+                            cursor: 'pointer',
+                            borderRadius: '8px',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = COLORS.lightGrayBg; e.currentTarget.style.color = COLORS.black; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = COLORS.grayText; }}
+                          >
+                            {item.label}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </nav>
 
             <div style={{
@@ -274,11 +406,11 @@ export const HeroLandingPage = () => {
             }} onClick={() => handleButtonClick('Request Samples')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/c309654f-ff68-4b5b-ad53-30bd67dcaad3.svg">
               Request Samples
             </ActionButton>
-            <ActionButton variant="secondary" style={{
-              padding: '8px 16px'
-          }} onClick={() => handleButtonClick('Case Studies')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/31cc74db-d2a1-4282-bda5-3c44d7cbaa41.svg">
-              Case Studies
-            </ActionButton>
+<Link to="/case-studies" style={{ textDecoration: 'none' }}>
+              <ActionButton variant="secondary" style={{ padding: '8px 16px' }}>
+                Case Studies
+              </ActionButton>
+            </Link>
           </div>
           </>
         )}
@@ -317,9 +449,11 @@ export const HeroLandingPage = () => {
             <ActionButton variant="primary" isMobile onClick={() => handleButtonClick('Request Samples')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/c309654f-ff68-4b5b-ad53-30bd67dcaad3.svg">
               Request Samples
             </ActionButton>
-            <ActionButton variant="secondary" isMobile onClick={() => handleButtonClick('Case Studies')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/31cc74db-d2a1-4282-bda5-3c44d7cbaa41.svg">
-              Case Studies
-            </ActionButton>
+<Link to="/case-studies" style={{ textDecoration: 'none' }}>
+              <ActionButton variant="secondary" isMobile>
+                Case Studies
+              </ActionButton>
+            </Link>
           </div>
         </div>
       )}
@@ -384,9 +518,11 @@ export const HeroLandingPage = () => {
             <ActionButton variant="primary" isMobile={isMobile} onClick={() => handleButtonClick('Request Samples')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/3076bda9-6bf7-46f7-812b-dcd56fbe4b15.svg">
               Request Samples
             </ActionButton>
-            <ActionButton variant="secondary" isMobile={isMobile} onClick={() => handleButtonClick('Case Studies')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/9989729a-a07e-4c26-bce1-a1023885e8d1.svg">
-              Case Studies
-            </ActionButton>
+<Link to="/case-studies" style={{ textDecoration: 'none' }}>
+              <ActionButton variant="secondary" isMobile={isMobile}>
+                Case Studies
+              </ActionButton>
+            </Link>
           </div>
         </div>
       </section>
@@ -495,7 +631,7 @@ export const HeroLandingPage = () => {
           borderRadius: '990px',
           justifyContent: 'center'
         }}>
-            {tabs.map(tab => <button key={tab} onClick={() => setActiveTab(tab)} style={{
+            {tabs.map((tab) => <button key={tab} onClick={() => setActiveTab(tab)} style={{
             padding: isMobile ? '10px 16px' : '16px 24px',
             borderRadius: '990px',
             border: 'none',
@@ -551,7 +687,7 @@ export const HeroLandingPage = () => {
                 flexDirection: 'column',
                 gap: isMobile ? '16px' : '24px'
               }}>
-                  {contentByTab[activeTab].map((item, i) => <div key={i} style={{
+                  {tabContent[activeTab]?.sections.map((item, i) => <div key={i} style={{
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '8px'
@@ -559,14 +695,14 @@ export const HeroLandingPage = () => {
                       <span style={{
                     color: COLORS.white,
                     fontSize: isMobile ? '14px' : '16px',
-                    fontWeight: 400
-                  }}>{item.title}</span>
+                        fontWeight: 600
+                      }}>{item.subtitle}</span>
                       <p style={{
                     color: COLORS.grayText,
                     fontSize: isMobile ? '14px' : '16px',
                     margin: 0,
                     lineHeight: '19.4px'
-                  }}>{item.desc}</p>
+                  }}>{item.description}</p>
                     </div>)}
                 </div>
 
@@ -586,8 +722,8 @@ export const HeroLandingPage = () => {
               justifyContent: 'center'
             }}>
                 <img 
-                  src={solutionImages[tabs.indexOf(activeTab)]} 
-                  alt={`${activeTab} preview`} 
+                  src={tabContent[activeTab]?.image} 
+                  alt={`${activeTab} preview`}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -624,12 +760,12 @@ export const HeroLandingPage = () => {
         width: '100%'
       }}>
           {[
-            { title: 'Built for Finance', desc: 'Purpose-built templates and frameworks designed specifically for investment banks, PE firms, and fund managers.' },
-            { title: 'Fast Turnaround', desc: 'From brief to finished deliverable in days, not weeks. We match the pace of your deal timeline.' },
-            { title: 'Institutional Quality', desc: 'Every document meets the rigorous standards expected by LPs, board members, and institutional investors.' },
-            { title: 'Data-Driven Narratives', desc: 'We back every claim with verifiable market data, benchmarks, and competitive intelligence.' },
-            { title: 'Confidential & Secure', desc: 'Bank-grade security protocols protect your sensitive deal information throughout the process.' },
-            { title: 'Dedicated Team', desc: 'A senior strategist, researcher, and designer assigned to your account for consistent quality.' }
+            { title: 'Built for Finance', desc: "We don't just design; we understand finance. Our team is fluent in capitalization tables, complex waterfalls, and investment theses, ensuring every slide is not only visually stunning but technically precise and market-ready." },
+            { title: 'Institutional Grade Data', desc: "Turn dense spreadsheets into compelling visual narratives. We transform complex datasets into intuitive, institutional-grade charts and graphs that allow investors to grasp your value proposition at a glance." },
+            { title: 'Founder-Led Execution', desc: "Nothing is outsourced. You work directly with the founder to get your deck ready, ensuring your materials benefit from expert experience and personal dedication without agency layers." },
+            { title: 'Bank-Level Security', desc: "Uncompromising security for your most sensitive data. We adhere to strict NDAs and utilize enterprise-grade encryption and security protocols, giving you the peace of mind that your proprietary information remains confidential." },
+            { title: 'Deal Speed', desc: "We operate at the speed of M&A. With 24/7 availability and rapid turnaround times, we ensure you never miss a critical deadline, keeping your deal momentum moving forward no matter the hour." },
+            { title: 'Outcome Focused', desc: "Design that drives results. We don't just make decks look good; we engineer them for conversion. Whether your goal is securing a meeting, raising capital, or closing a fund, our materials are optimized to help you win." }
           ].map((feature, i) => {
             const IconComponent = featureIcons[i].icon;
             return <div key={i} style={{
@@ -969,100 +1105,106 @@ export const HeroLandingPage = () => {
 
       {/* Footer */}
       <footer style={{
-      width: '100%',
-      backgroundColor: COLORS.black,
-      padding: isMobile ? '40px 24px' : isTablet ? '60px 60px' : '80px 120px',
-      display: 'flex',
-      flexDirection: isMobile ? 'column' : 'row',
-      justifyContent: 'space-between',
-      boxSizing: 'border-box',
-      borderTop: '1px solid rgba(255,255,255,0.1)',
-      gap: isMobile ? '40px' : '0'
-    }}>
-        <div style={{
-        maxWidth: isMobile ? '100%' : '320px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px'
-      }}>
-          <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/a35e7cae-f8d8-4d21-93e9-b4919d6e1ddd.png" alt="Footer Logo" style={{
-          height: '32px',
-          width: 'fit-content'
-        }} />
-          <p style={{
-          color: COLORS.lightGrayBg,
-          fontSize: isMobile ? '14px' : '16px',
-          lineHeight: '19.4px',
-          margin: 0
-        }}>
-            Happy Pitch provides<br />financial communication<br />for leading firms.
-          </p>
-          <div style={{
-          display: 'flex',
-          gap: '16px'
-        }}>
-            <a href="https://www.linkedin.com/company/happy-pitch/" target="_blank" rel="noopener noreferrer" style={{
-            width: '24px',
-            height: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-              <Linkedin size={20} color={COLORS.lightGrayBg} />
-            </a>
-            <a href="https://www.instagram.com/tryhappypitch" target="_blank" rel="noopener noreferrer" style={{
-            width: '24px',
-            height: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-              <Instagram size={20} color={COLORS.lightGrayBg} />
-            </a>
-          </div>
-        </div>
-
-        <div style={{
+        width: '100%',
+        backgroundColor: COLORS.black,
+        padding: isMobile ? '40px 24px' : '80px 120px',
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
-        gap: isMobile ? '32px' : '80px'
+        justifyContent: 'space-between',
+        boxSizing: 'border-box',
+        borderTop: '1px solid rgba(255,255,255,0.1)',
+        gap: isMobile ? '40px' : '0'
       }}>
-          <div style={{
+        <div style={{
+          maxWidth: isMobile ? '100%' : '320px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '12px'
+          gap: '16px'
         }}>
-            <Link to="/" style={{ textDecoration: 'none' }}><NavItem active isMobile={isMobile}>Home</NavItem></Link>
-            <Link to="/industries" style={{ textDecoration: 'none' }}><NavItem isMobile={isMobile}>Industries</NavItem></Link>
-            <Link to="/services" style={{ textDecoration: 'none' }}><NavItem isMobile={isMobile}>Services</NavItem></Link>
-          </div>
-          <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px'
-        }}>
-            <NavItem isMobile={isMobile}>Legal</NavItem>
-            <NavItem isMobile={isMobile}>Privacy</NavItem>
-            <NavItem isMobile={isMobile}>Contact</NavItem>
+          <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/a35e7cae-f8d8-4d21-93e9-b4919d6e1ddd.png" alt="Footer Logo" style={{
+            height: '32px',
+            width: 'fit-content'
+          }} />
+          <p style={{
+            color: COLORS.lightGrayBg,
+            fontSize: isMobile ? '14px' : '16px',
+            lineHeight: '19.4px',
+            margin: 0,
+            fontFamily: FONTS.inter,
+          }}>
+            Happy Pitch provides<br />financial communication<br />for leading firms.
+          </p>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <a href="https://www.linkedin.com/company/happy-pitch/" target="_blank" rel="noopener noreferrer" style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#f3f4f6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/tryhappypitch" target="_blank" rel="noopener noreferrer" style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#f3f4f6"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
           </div>
         </div>
 
-        <div style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'column',
-        gap: '16px',
-        width: isMobile ? '100%' : 'auto'
-      }}>
-          <ActionButton variant="secondary" isMobile={isMobile} style={{
-          padding: '8px 16px'
-        }} onClick={() => handleButtonClick('Request Samples')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/a0aab8e3-4c77-4139-a66e-0f9368e7ebb2.svg">
+        <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '32px' : '60px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <Link to="/" style={{ textDecoration: 'none' }}><span style={{ color: COLORS.white, fontSize: '16px', fontFamily: FONTS.inter }}>Home</span></Link>
+            <Link to="/industries" style={{ textDecoration: 'none' }}><span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Industries</span></Link>
+            <Link to="/services" style={{ textDecoration: 'none' }}><span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Services</span></Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{ color: COLORS.white, fontSize: '16px', fontFamily: FONTS.inter, fontWeight: 500, marginBottom: '4px' }}>Locations</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Boston</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>NYC</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Miami</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Houston</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Los Angeles</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Legal</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Privacy</span>
+            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Contact</span>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: isMobile ? '100%' : 'auto' }}>
+          <button style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: isMobile ? '12px 20px' : '12px 24px',
+            gap: '8px',
+            borderRadius: '990px',
+            cursor: 'pointer',
+            fontFamily: FONTS.inter,
+            fontSize: '16px',
+            fontWeight: 600,
+            backgroundColor: COLORS.white,
+            color: COLORS.black,
+            border: `1px solid ${COLORS.borderGray}`,
+            transition: 'all 0.2s ease',
+          }}>
             Request Samples
-          </ActionButton>
-          <ActionButton variant="secondary" isMobile={isMobile} style={{
-          padding: '8px 16px'
-        }} onClick={() => handleButtonClick('Case Studies')} icon="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/0fbcf04c-5d3a-42fb-a8c0-8e23d04cf7e4.svg">
-            Case Studies
-          </ActionButton>
+          </button>
+          <Link to="/case-studies" style={{ textDecoration: 'none' }}>
+            <button style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: isMobile ? '12px 20px' : '12px 24px',
+              gap: '8px',
+              borderRadius: '990px',
+              cursor: 'pointer',
+              fontFamily: FONTS.inter,
+              fontSize: '16px',
+              fontWeight: 600,
+              backgroundColor: COLORS.white,
+              color: COLORS.black,
+              border: `1px solid ${COLORS.borderGray}`,
+              transition: 'all 0.2s ease',
+              width: '100%',
+            }}>
+              Case Studies
+            </button>
+          </Link>
         </div>
       </footer>
     </div>;

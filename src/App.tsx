@@ -3,6 +3,8 @@ import { Container, Theme } from './settings/types';
 import { HeroLandingPage } from './components/generated/HeroLandingPage';
 import { ServicesPage } from './components/ServicesPage';
 import { IndustriesPage } from './components/IndustriesPage';
+import { CaseStudiesPage } from './components/CaseStudiesPage';
+import { PharmaIndustryPage } from './components/PharmaIndustryPage';
 
 const theme: Theme = 'light';
 const container: Container = 'none';
@@ -24,6 +26,8 @@ function App() {
         <Route path="/" element={<HeroLandingPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/industries" element={<IndustriesPage />} />
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/industries/pharma" element={<PharmaIndustryPage />} />
       </Routes>
     </BrowserRouter>
   );
