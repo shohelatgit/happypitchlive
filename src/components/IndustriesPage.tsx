@@ -163,9 +163,9 @@ export const IndustriesPage = () => {
           maxWidth: '900px',
         }}>
           <p style={{
-            fontpx',
+            fontSize: '14px',
             fontWeight: 500,
-            color:Size: '14 COLORS.grayText,
+            color: COLORS.grayText,
             fontFamily: FONTS.inter,
             textTransform: 'uppercase',
             letterSpacing: '1px',
