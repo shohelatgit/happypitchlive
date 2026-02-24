@@ -201,6 +201,8 @@ export const ServicesPage = () => {
                   boxSizing: 'border-box',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}>
                   <div style={{
                     width: '48px',
@@ -238,6 +240,7 @@ export const ServicesPage = () => {
                     marginBottom: '24px',
                     fontFamily: FONTS.inter,
                     lineHeight: '24px',
+                    flex: 1,
                   }}>
                     {service.description}
                   </p>
@@ -248,6 +251,7 @@ export const ServicesPage = () => {
                     color: COLORS.black,
                     fontWeight: 500,
                     fontFamily: FONTS.inter,
+                    marginTop: 'auto',
                   }}>
                     <span>Learn More</span>
                     <ArrowRight size={16} />
@@ -414,7 +418,7 @@ export const ServicesPage = () => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <span style={{ color: COLORS.white, fontSize: '16px', fontFamily: FONTS.inter, fontWeight: 500, marginBottom: '4px' }}>Locations</span>
-            <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Boston</span>
+            <Link to="/locations/boston" style={{ textDecoration: 'none' }}><span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Boston</span></Link>
             <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>NYC</span>
             <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Miami</span>
             <span style={{ color: COLORS.grayText, fontSize: '16px', fontFamily: FONTS.inter }}>Houston</span>
