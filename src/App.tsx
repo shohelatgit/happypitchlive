@@ -5,6 +5,7 @@ import { ServicesPage } from './components/ServicesPage';
 import { IndustriesPage } from './components/IndustriesPage';
 import { CaseStudiesPage } from './components/CaseStudiesPage';
 import { PharmaIndustryPage } from './components/PharmaIndustryPage';
+import { BiotechIndustryPage } from './components/BiotechIndustryPage';
 import { BostonLocationPage } from './components/BostonLocationPage';
 
 const theme: Theme = 'light';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/industries" element={<IndustriesPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/industries/pharma" element={<PharmaIndustryPage />} />
+        <Route path="/industries/biotech" element={<BiotechIndustryPage />} />
         <Route path="/locations/boston" element={<BostonLocationPage />} />
       </Routes>
     </BrowserRouter>

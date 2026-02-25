@@ -18,7 +18,7 @@ const FONTS = {
 
 const industriesList = [
   { label: 'Pharmaceuticals', slug: 'pharma', isPage: true },
-  { label: 'Biotechnology', slug: 'biotech' },
+  { label: 'Biotechnology', slug: 'biotech', isPage: true },
   { label: 'Private Equity', slug: 'private-equity' },
   { label: 'Private Credit', slug: 'private-credit' },
   { label: 'Venture Capital', slug: 'venture-capital' },

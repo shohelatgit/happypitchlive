@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Lightbulb, Palette, Building2, Presentation, FileText, Briefcase, TrendingUp, Users, Beaker } from 'lucide-react';
+import { Search, Lightbulb, Palette, Building2, Presentation, FileText, Briefcase, TrendingUp, Users, Dna } from 'lucide-react';
 import { useResponsive } from '@/hooks/use-media-query';
 import { Navbar } from './Navbar';
 
@@ -309,94 +309,6 @@ const StrategicPartnerCard = ({
   </div>
 );
 
-const BenefitCard = ({
-  title,
-  description,
-  bullets
-}: {
-  title: string;
-  description: string;
-  bullets: string[];
-}) => (
-  <div style={{
-    width: '384px',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '8px',
-    gap: '8px',
-    backgroundColor: 'rgba(247, 247, 247, 1)',
-    boxSizing: 'border-box',
-    boxShadow: '0px 4px 8px rgba(154, 154, 154, 0.24)',
-    borderRadius: '24px',
-    overflow: 'hidden'
-  }}>
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '16px',
-      gap: '16px',
-      backgroundColor: 'rgba(255, 255, 255, 1)',
-      borderRadius: '16px',
-      flexGrow: 1
-    }}>
-      <h3 style={{
-        margin: 0,
-        color: 'rgba(0, 0, 0, 1)',
-        fontSize: '24px',
-        fontFamily: FONTS.inter,
-        fontWeight: 700,
-        lineHeight: '36px',
-        letterSpacing: '-0.96px',
-        textAlign: 'center'
-      }}>
-        {title}
-      </h3>
-      <p style={{
-        margin: 0,
-        color: 'rgba(124, 124, 124, 1)',
-        fontSize: '16px',
-        fontFamily: FONTS.inter,
-        fontWeight: 400,
-        lineHeight: '19.4px',
-        textAlign: 'left'
-      }}>
-        {description}
-      </p>
-    </div>
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '16px',
-      gap: '8px',
-      backgroundColor: 'rgba(255, 255, 255, 1)',
-      borderRadius: '16px'
-    }}>
-      {bullets.map((bullet, idx) => (
-        <div key={idx} style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/34f8d7f6-803f-4944-ac31-53d0e1e15c0f.svg" alt="" style={{
-            width: '24px',
-            height: '24px'
-          }} />
-          <span style={{
-            color: 'rgba(124, 124, 124, 1)',
-            fontSize: '16px',
-            fontFamily: FONTS.inter,
-            fontWeight: 400,
-            lineHeight: '19.4px'
-          }}>
-            {bullet}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -455,14 +367,14 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 const services = [
   {
+    title: 'Biotech Pitch Decks',
+    description: 'Investor-ready presentations for Series A through Series E that articulate your science and commercial potential with clarity.',
+    icon: Dna
+  },
+  {
     title: 'Corporate Presentations',
     description: 'Annual shareholder presentations, strategic board decks, and executive communications with institutional-grade polish.',
     icon: Building2
-  },
-  {
-    title: 'Pitch Decks',
-    description: 'Investor-ready pitch decks for Series A through Series E that articulate your equity story with clarity and impact.',
-    icon: Presentation
   },
   {
     title: 'Investor Memos',
@@ -471,12 +383,12 @@ const services = [
   },
   {
     title: 'CIMs',
-    description: 'Comprehensive sell-side materials that present your business opportunity with depth, polish, and strategic insight.',
+    description: 'Comprehensive sell-side materials that present your biotech opportunity with depth, polish, and strategic insight.',
     icon: Briefcase
   },
   {
-    title: 'Sales Decks',
-    description: 'B2B sales presentations that articulate value proposition, demonstrate ROI, and accelerate buying cycles.',
+    title: 'Clinical Data Viz',
+    description: 'Clear visualization of clinical trial results that communicates efficacy and safety to investors and regulators.',
     icon: TrendingUp
   },
   {
@@ -604,7 +516,7 @@ const testimonials = [
   }
 ];
 
-export const PharmaIndustryPage = () => {
+export const BiotechIndustryPage = () => {
   const { isMobile } = useResponsive();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
@@ -654,7 +566,7 @@ export const PharmaIndustryPage = () => {
             fontWeight: 400,
             lineHeight: '27px'
           }}>
-            Solutions for Pharmaceuticals
+            Solutions for Biotechnology
           </span>
           <h1 style={{
             color: COLORS.white,
@@ -664,7 +576,7 @@ export const PharmaIndustryPage = () => {
             letterSpacing: isMobile ? '-1.08px' : '-1.68px',
             margin: 0
           }}>
-            Financial Presentations That Close Deals
+            From Science to Series: Presentations That Get Funded
           </h1>
           <span style={{
             color: 'rgba(124, 124, 124, 1)',
@@ -673,7 +585,7 @@ export const PharmaIndustryPage = () => {
             fontWeight: 400,
             lineHeight: '27px'
           }}>
-            Compelling presentations that help pharma companies raise capital and win investors.
+            Compelling presentations that help biotech companies articulate their science and secure capital.
           </span>
           <button style={{
             width: 'auto',
@@ -738,7 +650,7 @@ export const PharmaIndustryPage = () => {
             margin: 0,
             color: 'rgba(0, 0, 0, 1)'
           }}>
-            Backed by Data. Built to Transact
+            Backed by Science. Built for Investment
           </h2>
         </div>
         <div style={{
@@ -748,19 +660,19 @@ export const PharmaIndustryPage = () => {
           justifyContent: 'center'
         }}>
           <FeatureCard
-            title="Show the thesis. Prove the value"
-            description="Marketing and investor materials for operators and sponsors."
-            icon={Search}
+            title="Translate Complex Science"
+            description="We turn intricate biology into clear, compelling narratives that investors can understand and act on."
+            icon={Dna}
           />
           <FeatureCard
-            title="Support investor decisions"
-            description="Get reports and memos that communicate performance, strategy, and outcomes with precision."
+            title="Showcase Clinical Progress"
+            description="Present clinical trial data and regulatory milestones that demonstrate value and de-risk investments."
             icon={FileText}
           />
           <FeatureCard
-            title="Design for deals"
-            description="From syndications to fund launches. Get materials built for every stage."
-            icon={Palette}
+            title="Build Investor Confidence"
+            description="Professional materials that establish credibility and trust with sophisticated biotech investors."
+            icon={TrendingUp}
           />
         </div>
       </section>
@@ -800,7 +712,7 @@ export const PharmaIndustryPage = () => {
                 letterSpacing: '-0.4px',
                 margin: 0
               }}>
-                Pharmaceutical firms are judged on polish
+                In biotech, your pitch is your first data point
               </h3>
               <p style={{
                 color: 'rgba(124, 124, 124, 1)',
@@ -810,7 +722,7 @@ export const PharmaIndustryPage = () => {
                 lineHeight: '19.4px',
                 margin: 0
               }}>
-                In a market built on trust and clarity, presentation defines perception. Strong materials shape how your story is received. Request samples to see what institutional-grade collateral looks like.
+                Investors judge the quality of your science by the quality of your presentation. Make that first impression count with materials that reflect the rigor of your research.
               </p>
               <button style={{
                 width: 'auto',
@@ -883,7 +795,7 @@ export const PharmaIndustryPage = () => {
             margin: 0,
             color: 'rgba(0, 0, 0, 1)'
           }}>
-            Services for Pharmaceuticals
+            Services for Biotechnology
           </h2>
         </div>
         <div style={{
@@ -952,7 +864,7 @@ export const PharmaIndustryPage = () => {
           />
           <StrategicPartnerCard
             title="Institutional Design"
-            description="Our designers specialize in translating complex financial data into clear, compelling visuals that build trust."
+            description="Our designers specialize in translating complex scientific data into clear, compelling visuals that build trust."
             imgSrc="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/e0b1aa3f-6c43-4ac5-b4b1-9a7dd5f0ff55.png"
             accentColor="rgba(15, 0, 99, 1)"
           />
@@ -1047,7 +959,7 @@ export const PharmaIndustryPage = () => {
             margin: 0,
             color: 'rgba(0, 0, 0, 1)'
           }}>
-            Turn Complex Strategies Into Presentations That Close Deals
+            Turn Complex Science Into Presentations That Close Deals
           </h2>
           <p style={{
             color: 'rgba(124, 124, 124, 1)',
@@ -1057,7 +969,7 @@ export const PharmaIndustryPage = () => {
             lineHeight: '27px',
             margin: '24px 0 0 0'
           }}>
-            Pharmaceutical companies that raised billions. Biotech firms that closed successful rounds. When the stakes are high, sophisticated firms choose materials that actually work.
+            Biotech companies that raised billions. Pharma partnerships that accelerated growth. When the stakes are high, sophisticated firms choose materials that actually work.
           </p>
         </div>
         <div style={{
@@ -1070,7 +982,7 @@ export const PharmaIndustryPage = () => {
             {
               title: 'Research',
               desc: 'Market intelligence that reveals where you win. Deep industry insights and data-backed analysis.',
-              items: ['Market Sizing & Analysis', 'Competitive Landscape', 'Industry Benchmarks', 'Regulatory Insights'],
+              items: ['Market Sizing & Analysis', 'Competitive Landscape', 'Therapeutic Area Insights', 'Investor Targeting'],
               icon: Search,
               color: '#3b82f6',
               bgColor: 'rgba(59, 130, 246, 0.1)'
@@ -1247,20 +1159,20 @@ export const PharmaIndustryPage = () => {
           FAQs
         </h2>
         <FAQItem
-          question="What types of clients do you work with?"
-          answer="We serve sophisticated financial organizations including private equity firms, hedge funds, family offices, emerging managers, and institutional asset managers. Our clients typically require institutional-grade materials for capital raising, investor relations, and business development."
+          question="What types of biotech clients do you work with?"
+          answer="We work with companies across the biotech spectrum—from early-stage discovery companies to clinical-stage therapeutics firms. Our clients include novel modality platforms, orphan disease companies, and platform technologies seeking Series A through Series E funding."
         />
         <FAQItem
-          question="What services do you offer?"
-          answer="We offer a comprehensive suite of financial communication services including pitch decks, investor presentations, fund marketing materials, board presentations, case studies, and brand development for financial firms."
+          question="How do you handle complex scientific data?"
+          answer="Our team includes specialists with backgrounds in molecular biology, pharmacology, and clinical research. We work closely with your scientific leadership to ensure accurate representation of your technology while making it accessible to investor audiences."
         />
         <FAQItem
-          question="How do you ensure quality and confidentiality?"
-          answer="We maintain strict confidentiality protocols and have NDAs in place for all client work. Our team has extensive experience working with sensitive financial information and institutional-grade standards."
+          question="What services do you offer for biotech companies?"
+          answer="We offer a comprehensive suite including pitch decks, investor presentations, corporate presentations, CIMs, board materials, clinical data visualization, and strategic advisory for capital raises and business development."
         />
         <FAQItem
           question="What is your typical turnaround time?"
-          answer="Our team works efficiently to deliver polished materials within tight deadlines. Typical projects range from 2-4 weeks depending on scope and complexity."
+          answer="Our team works efficiently to deliver polished materials within tight deadlines. Typical projects range from 2-4 weeks depending on scope and complexity. We can often accommodate expedited timelines for time-sensitive funding rounds."
         />
       </section>
 
@@ -1295,7 +1207,7 @@ export const PharmaIndustryPage = () => {
             fontSize: isMobile ? '16px' : '22px',
             margin: '0 0 40px 0'
           }}>
-            Great strategies deserve great storytelling. Don't let a weak deck cost you your next allocation.
+            Great science deserves great storytelling. Don't let a weak deck cost you your next funding round.
           </p>
           <button style={{
             backgroundColor: COLORS.white,
