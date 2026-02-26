@@ -647,15 +647,6 @@ export const PharmaIndustryPage = () => {
           gap: '40px',
           zIndex: 2
         }}>
-          <span style={{
-            color: 'rgba(124, 124, 124, 1)',
-            fontSize: '18px',
-            fontFamily: FONTS.inter,
-            fontWeight: 400,
-            lineHeight: '27px'
-          }}>
-            Solutions for Pharmaceuticals
-          </span>
           <h1 style={{
             color: COLORS.white,
             fontSize: isMobile ? '36px' : '56px',

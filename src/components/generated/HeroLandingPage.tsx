@@ -472,11 +472,21 @@ export const HeroLandingPage = () => {
     }}>
         <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/adc7c371-3261-4275-8f9e-1b353b4e85de.png" alt="Background" style={{
         position: 'absolute',
-        top: 0,
+        top: '-5%',
         left: 0,
-        width: '100%',
-        height: '100%',
+        width: '110%',
+        height: '110%',
         objectFit: 'cover',
+        objectPosition: 'center bottom',
+        zIndex: 0
+      }} />
+        <div style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '50%',
+        height: '120px',
+        background: 'linear-gradient(to bottom, rgba(240,240,240,1) 0%, rgba(240,240,240,0.8) 50%, rgba(240,240,240,0) 100%)',
         zIndex: 0
       }} />
         <div style={{
