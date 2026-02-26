@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Presentation, FileText, Briefcase, TrendingUp, Search, Lightbulb, Palette, Users } from 'lucide-react';
+import { Building2, Presentation, FileText, Briefcase, TrendingUp, Users, Search, Lightbulb, Palette } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useResponsive } from '@/hooks/use-media-query';
 import { Navbar } from './Navbar';
 
@@ -114,7 +115,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
-const ServiceCard = ({
+const FeatureCard = ({
   title,
   description,
   icon: Icon
@@ -124,7 +125,7 @@ const ServiceCard = ({
   icon?: React.ComponentType<{ size?: number; color?: string }>;
 }) => (
   <div style={{
-    width: '384px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     padding: '8px',
@@ -154,104 +155,116 @@ const ServiceCard = ({
           backgroundColor: 'rgba(0, 0, 0, 1)',
           borderRadius: '12px'
         }}>
-          <Icon size={24} color="white" />
+          <Icon size= {24} color="white" />
         </div>
       )}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px'
+      <h3 style={{
+        margin: 0,
+        color: 'rgba(0, 0, 0, 1)',
+        fontSize: '24px',
+        fontFamily: FONTS.inter,
+        fontWeight: 700,
+        lineHeight: '36px',
+        letterSpacing: '-0.96px',
+        textAlign: 'center'
       }}>
-        <h3 style={{
-          margin: 0,
-          color: 'rgba(0, 0, 0, 1)',
-          fontSize: '24px',
-          fontFamily: FONTS.inter,
-          fontWeight: 700,
-          lineHeight: '36px',
-          letterSpacing: '-0.96px'
-        }}>
-          {title}
-        </h3>
-        <p style={{
-          margin: 0,
-          color: 'rgba(124, 124, 124, 1)',
-          fontSize: '16px',
-          fontFamily: FONTS.inter,
-          fontWeight: 400,
-          lineHeight: '19.4px'
-        }}>
-          {description}
-        </p>
-      </div>
-      <button style={{
-        background: 'none',
-        border: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
-        padding: 0,
-        cursor: 'pointer',
-        marginTop: 'auto'
+        {title}
+      </h3>
+      <p style={{
+        margin: 0,
+        color: 'rgba(124, 124, 124, 1)',
+        fontSize: '16px',
+        fontFamily: FONTS.inter,
+        fontWeight: 400,
+        lineHeight: '19.4px',
+        textAlign: 'left'
       }}>
-        <span style={{
-          color: 'rgba(0, 0, 0, 1)',
-          fontSize: '18px',
-          fontFamily: FONTS.inter,
-          fontWeight: 600,
-          lineHeight: '21.8px'
-        }}>
-          Explore Services
-        </span>
-        <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/728942be-b2da-483d-abbb-9e4e688b7294.svg" alt="" style={{
-          width: '24px',
-          height: '24px'
-        }} />
-      </button>
+        {description}
+      </p>
     </div>
   </div>
 );
 
-const servicesList = [
-  {
-    slug: 'corporate-presentation',
-    title: 'Corporate Presentations',
-    description: 'Annual shareholder presentations, strategic board decks, and executive communications with institutional-grade polish.',
-    icon: Building2,
-  },
-  {
-    slug: 'pitch-decks',
-    title: 'Pitch Decks',
-    description: 'Investor-ready pitch decks for Series A through Series E that articulate your equity story with clarity and impact.',
-    icon: Presentation,
-  },
-  {
-    slug: 'investor-memos',
-    title: 'Investor Memos',
-    description: 'Investment memos that articulate your thesis, demonstrate track record, and build confidence with LPs.',
-    icon: FileText,
-  },
-  {
-    slug: 'cims',
-    title: 'CIMs',
-    description: 'Comprehensive sell-side materials that present your business opportunity with depth, polish, and strategic insight.',
-    icon: Briefcase,
-  },
-  {
-    slug: 'sales-decks',
-    title: 'Sales Decks',
-    description: 'B2B sales presentations that articulate value proposition, demonstrate ROI, and accelerate complex buying cycles.',
-    icon: TrendingUp,
-  },
-  {
-    slug: 'management-presentations',
-    title: 'Management Presentations',
-    description: 'Board-ready presentations that command attention and drive strategic decisions.',
-    icon: Users,
-  }
-];
+const StrategicPartnerCard = ({
+  title,
+  description,
+  imgSrc,
+  accentColor
+}: {
+  title: string;
+  description: string;
+  imgSrc: string;
+  accentColor: string;
+}) => (
+  <div style={{
+    width: '384px',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '8px',
+    gap: '8px',
+    backgroundColor: 'rgba(247, 247, 247, 1)',
+    boxShadow: '0px 4px 8px rgba(154, 154, 154, 0.24)',
+    borderRadius: '24px'
+  }}>
+    <div style={{
+      backgroundColor: 'rgba(0, 0, 0, 1)',
+      borderRadius: '16px',
+      overflow: 'hidden',
+      position: 'relative',
+      height: '240px'
+    }}>
+      <div style={{
+        width: '223px',
+        height: '337px',
+        backgroundColor: accentColor,
+        filter: 'blur(140px)',
+        position: 'absolute',
+        left: '110px',
+        top: '-36px',
+        borderRadius: '50%'
+      }} />
+      <img src={imgSrc} alt="" style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover'
+      }} />
+    </div>
+    <div style={{
+      padding: '16px',
+      backgroundColor: 'rgba(255, 255, 255, 1)',
+      borderRadius: '16px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '16px',
+      flexGrow: 1
+    }}>
+      <h3 style={{
+        margin: 0,
+        fontSize: '24px',
+        fontFamily: FONTS.inter,
+        fontWeight: 700,
+        lineHeight: '36px',
+        letterSpacing: '-0.96px',
+        textAlign: 'center'
+      }}>
+        {title}
+      </h3>
+      <p style={{
+        margin: 0,
+        color: 'rgba(124, 124, 124, 1)',
+        fontSize: '16px',
+        fontFamily: FONTS.inter,
+        fontWeight: 400,
+        lineHeight: '19.4px',
+        textAlign: 'left'
+      }}>
+        {description}
+      </p>
+    </div>
+  </div>
+);
 
-export const ServicesPage = () => {
+export const ManagementPresentationsPage = () => {
   const { isMobile } = useResponsive();
 
   return (
@@ -294,7 +307,7 @@ export const ServicesPage = () => {
             letterSpacing: isMobile ? '-1.08px' : '-1.68px',
             margin: 0
           }}>
-            Financial Presentations That Close Deals
+            Management Presentations That Drive Decisions
           </h1>
           <span style={{
             color: 'rgba(124, 124, 124, 1)',
@@ -303,7 +316,7 @@ export const ServicesPage = () => {
             fontWeight: 400,
             lineHeight: '27px'
           }}>
-            From pitch decks to board presentations, every deliverable designed to help you raise capital, win investors, and close deals.
+            Board-ready presentations that command attention and drive strategic decisions.
           </span>
           <button style={{
             width: 'auto',
@@ -346,7 +359,7 @@ export const ServicesPage = () => {
         }} />
       </section>
 
-      {/* Our Services Section - All 6 cards */}
+      {/* Why Collateral Makes the Difference */}
       <section style={{
         width: '100%',
         padding: isMobile ? '60px 24px' : '120px 120px',
@@ -368,24 +381,36 @@ export const ServicesPage = () => {
             margin: 0,
             color: 'rgba(0, 0, 0, 1)'
           }}>
-            Our Services
+            Why Collateral Makes the Difference
           </h2>
         </div>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
           gap: '24px',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          width: '100%'
         }}>
-          {servicesList.map((service, index) => (
-            <Link key={service.slug} to={`/services/${service.slug}`} style={{ textDecoration: 'none' }}>
-              <ServiceCard
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-              />
-            </Link>
-          ))}
+          <FeatureCard
+            title="Executive Alignment"
+            description="Presentations that unify leadership around strategic priorities and key decisions."
+            icon={Building2}
+          />
+          <FeatureCard
+            title="Data Mastery"
+            description="Complex operational metrics distilled into clear visuals that facilitate discussion."
+            icon={Search}
+          />
+          <FeatureCard
+            title="Strategic Clarity"
+            description="Narrative frameworks that connect operations to long-term value creation."
+            icon={Lightbulb}
+          />
+          <FeatureCard
+            title="Boardroom Polish"
+            description="Executive-grade design that commands respect and focuses discussion."
+            icon={Palette}
+          />
         </div>
       </section>
 
@@ -449,7 +474,7 @@ export const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Research/Strategy/Design Section */}
+      {/* Services Grid */}
       <section style={{
         width: '100%',
         padding: isMobile ? '60px 24px' : '120px 120px',
@@ -457,8 +482,7 @@ export const ServicesPage = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '64px',
-        backgroundColor: COLORS.white
+        gap: '64px'
       }}>
         <div style={{
           width: isMobile ? '100%' : '792px',
@@ -472,7 +496,7 @@ export const ServicesPage = () => {
             margin: 0,
             color: 'rgba(0, 0, 0, 1)'
           }}>
-            From Strategy to Execution
+            Presentations That Align Leadership and Drive Execution
           </h2>
           <p style={{
             color: 'rgba(124, 124, 124, 1)',
@@ -482,7 +506,7 @@ export const ServicesPage = () => {
             lineHeight: '27px',
             margin: '24px 0 0 0'
           }}>
-            Every project gets dedicated expertise across research, strategy, and design to ensure your materials deliver results.
+            Board materials that facilitate strategic decisions, performance reviews, and organizational alignment.
           </p>
         </div>
         <div style={{
@@ -494,24 +518,24 @@ export const ServicesPage = () => {
           {[
             {
               title: 'Research',
-              desc: 'Market intelligence that reveals where you win. Deep industry insights and data-backed analysis.',
-              items: ['Market Sizing & Analysis', 'Competitive Landscape', 'Industry Benchmarks', 'Investor Targeting'],
+              desc: 'Operational insights and performance benchmarking to ground discussions in data.',
+              items: ['KPI Analysis', 'Org Structure Review', 'Market Context', 'Peer Benchmarking'],
               icon: Search,
               color: '#3b82f6',
               bgColor: 'rgba(59, 130, 246, 0.1)'
             },
             {
               title: 'Strategy',
-              desc: 'Investment theses built on logic and clarity. Messaging frameworks that articulate value.',
-              items: ['Investment Thesis Development', 'Positioning Frameworks', 'Value Proposition Design', 'Stakeholder Mapping'],
+              desc: 'Strategic frameworks that clarify priorities and align leadership.',
+              items: ['Strategic Roadmap', 'OKR Frameworks', 'Portfolio Review', 'Decision Matrix'],
               icon: Lightbulb,
               color: '#f97316',
               bgColor: 'rgba(249, 115, 22, 0.1)'
             },
             {
               title: 'Design',
-              desc: 'Sophisticated visuals that match your strategy. Complex ideas transformed into clear presentations.',
-              items: ['Pitch Deck Creation', 'Data Visualization', 'Brand-Aligned Templates', 'Print-Ready Materials'],
+              desc: 'Executive materials that facilitate discussion and decision-making.',
+              items: ['Board Deck Creation', 'Data Visualization', 'Executive Summary', 'Print Materials'],
               icon: Palette,
               color: '#a855f7',
               bgColor: 'rgba(168, 85, 247, 0.1)'
@@ -520,57 +544,242 @@ export const ServicesPage = () => {
             const IconComponent = item.icon;
             return (
               <div key={i} style={{
-                backgroundColor: COLORS.white,
-                padding: '24px',
-                borderRadius: '24px',
-                boxShadow: '0px 4px 8px rgba(154, 154, 154, 0.24)'
+                backgroundColor: COLORS.offWhite,
+                padding: '8px',
+                borderRadius: '24px'
               }}>
                 <div style={{
-                  width: '64px',
-                  height: '64px',
+                  backgroundColor: COLORS.white,
+                  padding: isMobile ? '20px' : '24px',
                   borderRadius: '16px',
-                  backgroundColor: item.bgColor,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '24px'
-                }}>
-                  <IconComponent size={32} color={item.color} strokeWidth={2} />
-                </div>
-                <h4 style={{
-                  fontSize: '24px',
-                  fontWeight: 700,
-                  margin: '0 0 16px 0'
-                }}>{item.title}</h4>
-                <p style={{
-                  color: COLORS.grayText,
-                  fontSize: '16px',
-                  margin: '0 0 24px 0'
-                }}>{item.desc}</p>
-                <div style={{
+                  height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '12px'
+                  gap: isMobile ? '16px' : '24px'
                 }}>
-                  {item.items.map((label, j) => (
-                    <div key={j} style={{
-                      display: 'flex',
-                      gap: '8px',
-                      alignItems: 'center'
-                    }}>
-                      <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/7d836645-589c-450f-b94e-1793a6133cce.svg" alt="check" style={{
-                        width: '24px'
-                      }} />
-                      <span style={{
-                        fontSize: '16px',
-                        color: COLORS.grayText
-                      }}>{label}</span>
-                    </div>
-                  ))}
+                  <div style={{
+                    width: isMobile ? '56px' : '64px',
+                    height: isMobile ? '56px' : '64px',
+                    borderRadius: '16px',
+                    backgroundColor: item.bgColor,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <IconComponent size={isMobile ? 28 : 32} color={item.color} strokeWidth={2} />
+                  </div>
+                  <h4 style={{
+                    fontSize: isMobile ? '20px' : '24px',
+                    fontWeight: 700,
+                    margin: 0
+                  }}>{item.title}</h4>
+                  <p style={{
+                    color: COLORS.grayText,
+                    fontSize: isMobile ? '14px' : '16px',
+                    margin: 0
+                  }}>{item.desc}</p>
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                    marginTop: 'auto'
+                  }}>
+                    {item.items.map((label, j) => (
+                      <div key={j} style={{
+                        display: 'flex',
+                        gap: '8px',
+                        alignItems: 'center'
+                      }}>
+                        <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/7d836645-589c-450f-b94e-1793a6133cce.svg" alt="check" style={{
+                          width: '24px'
+                        }} />
+                        <span style={{
+                          fontSize: '16px',
+                          color: COLORS.grayText
+                        }}>{label}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section style={{
+        width: '100%',
+        padding: isMobile ? '60px 24px' : '120px 120px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '64px'
+      }}>
+        <div style={{
+          width: isMobile ? '100%' : '588px',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '32px' : '56px',
+            fontWeight: 700,
+            lineHeight: isMobile ? '38px' : '67.2px',
+            letterSpacing: isMobile ? '-0.96px' : '-1.68px',
+            margin: 0,
+            color: 'rgba(0, 0, 0, 1)'
+          }}>
+            Testimonials
+          </h2>
+          <p style={{
+            color: 'rgba(124, 124, 124, 1)',
+            fontSize: '18px',
+            fontFamily: FONTS.inter,
+            fontWeight: 400,
+            lineHeight: '27px',
+            margin: '24px 0 0 0'
+          }}>
+            Management presentations that aligned boards and drove major strategic decisions.
+          </p>
+        </div>
+        <div style={{
+          width: '100%',
+          maxWidth: '996px',
+          backgroundColor: COLORS.white,
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0px 4px 8px rgba(154, 154, 154, 0.24)'
+        }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            backgroundColor: COLORS.black,
+            borderRadius: '16px'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              padding: isMobile ? '24px' : '32px',
+              gap: '24px',
+              flex: 1
+            }}>
+              <p style={{
+                color: 'rgba(247, 247, 247, 1)',
+                fontSize: '18px',
+                fontFamily: FONTS.inter,
+                fontWeight: 400,
+                lineHeight: '27px',
+                margin: 0
+              }}>
+                Happy Pitch's board presentations transformed our quarterly reviews. The clear strategic roadmap and performance visuals aligned our leadership team around key priorities.
+              </p>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <span style={{
+                  color: COLORS.white,
+                  fontSize: '24px',
+                  fontFamily: FONTS.inter,
+                  fontWeight: 700,
+                  lineHeight: '36px',
+                  letterSpacing: '-0.96px'
+                }}>
+                  Elizabeth Rivera
+                </span>
+                <span style={{
+                  color: 'rgba(124, 124, 124, 1)',
+                  fontSize: '14px',
+                  fontFamily: FONTS.inter,
+                  fontWeight: 500,
+                  lineHeight: '21px'
+                }}>
+                  CEO, Growth Equity Portfolio Company
+                </span>
+              </div>
+            </div>
+            <div style={{
+              flex: 1,
+              minHeight: '300px',
+              backgroundColor: 'rgba(240, 240, 240, 1)',
+              borderRadius: '20px',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <img src="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/3595f067-de99-4c66-b40d-8a5ba3ce9647.png" alt="" style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                position: 'absolute',
+                top: 0,
+                left: 0
+              }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Strategic Partner Section */}
+      <section style={{
+        width: '100%',
+        padding: isMobile ? '60px 24px' : '120px 120px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '64px'
+      }}>
+        <div style={{
+          width: isMobile ? '100%' : '788px',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '32px' : '56px',
+            fontWeight: 700,
+            lineHeight: isMobile ? '38px' : '67.2px',
+            letterSpacing: isMobile ? '-0.96px' : '-1.68px',
+            margin: '0 0 24px 0',
+            color: 'rgba(0, 0, 0, 1)'
+          }}>
+            More than a Vendor, A Strategic Partner
+          </h2>
+          <p style={{
+            color: 'rgba(124, 124, 124, 1)',
+            fontSize: '18px',
+            fontFamily: FONTS.inter,
+            fontWeight: 400,
+            lineHeight: '27px',
+            margin: 0
+          }}>
+            Work with a multidisciplinary team, built to execute with precision at every stage.
+          </p>
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+          gap: '24px',
+          justifyContent: 'center'
+        }}>
+          <StrategicPartnerCard
+            title="Dedicated strategy lead"
+            description="Partner with a former investor or operator who speaks your language and understands your market context."
+            imgSrc="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/0fef8eed-ff2b-4535-8c3a-1d13a1eb6ad1.png"
+            accentColor="rgba(0, 68, 99, 1)"
+          />
+          <StrategicPartnerCard
+            title="Institutional Design"
+            description="Our designers specialize in translating complex financial data into clear, compelling visuals that build trust."
+            imgSrc="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/e0b1aa3f-6c43-4ac5-b4b1-9a7dd5f0ff55.png"
+            accentColor="rgba(15, 0, 99, 1)"
+          />
+          <StrategicPartnerCard
+            title="Precision Execution"
+            description="We move at the speed of finance, delivering polished collateral under tight deadlines without sacrificing quality."
+            imgSrc="https://storage.googleapis.com/storage.magicpath.ai/user/374684919160512512/figma-assets/1d5d77d6-9a7e-4e7b-9ad0-2dfd5f8d3ea6.png"
+            accentColor="rgba(99, 79, 0, 1)"
+          />
         </div>
       </section>
 
@@ -592,20 +801,20 @@ export const ServicesPage = () => {
           FAQs
         </h2>
         <FAQItem
-          question="What types of clients do you work with?"
-          answer="We serve sophisticated financial organizations including private equity firms, hedge funds, family offices, emerging managers, and institutional asset managers. Our clients typically require institutional-grade materials for capital raising, investor relations, and business development."
+          question="What types of management presentations do you create?"
+          answer="Board decks, quarterly business reviews, strategic planning sessions, performance dashboards, and executive summaries."
         />
         <FAQItem
-          question="What services do you offer?"
-          answer="We offer a comprehensive suite of financial communication services including pitch decks, investor presentations, fund marketing materials, board presentations, case studies, and brand development for financial firms."
+          question="How do you handle sensitive executive information?"
+          answer="We use secure workflows and NDAs. All materials are treated with the highest confidentiality standards."
         />
         <FAQItem
-          question="How do you ensure quality and confidentiality?"
-          answer="We maintain strict confidentiality protocols and have NDAs in place for all client work. Our team has extensive experience working with sensitive financial information and institutional-grade standards."
+          question="Can you integrate live data into presentations?"
+          answer="Yes, we can create dynamic templates that pull from your KPI dashboards and reporting systems."
         />
         <FAQItem
-          question="What is your typical turnaround time?"
-          answer="Our team works efficiently to deliver polished materials within tight deadlines. Typical projects range from 2-4 weeks depending on scope and complexity."
+          question="What makes your board materials different?"
+          answer="We focus on clarity, strategic alignment, and discussion facilitation rather than just data presentation."
         />
       </section>
 
@@ -633,14 +842,14 @@ export const ServicesPage = () => {
             letterSpacing: isMobile ? '-0.96px' : '-1.68px',
             margin: '0 0 40px 0'
           }}>
-            Your Next Raise Starts With a Better Deck
+            Sophisticated Collateral Starts With Us
           </h2>
           <p style={{
             color: 'rgba(124, 124, 124, 1)',
             fontSize: isMobile ? '16px' : '22px',
             margin: '0 0 40px 0'
           }}>
-            Great strategies deserve great storytelling. Don't let a weak presentation cost you your next funding round.
+            Great strategies get overlooked when they're not presented the right way. Don't let weak communication cost you the allocation.
           </p>
           <button style={{
             backgroundColor: COLORS.white,

@@ -15,6 +15,12 @@ import { FoodAndBeverageIndustryPage } from './components/FoodAndBeverageIndustr
 import { SaaSIndustryPage } from './components/SaaSIndustryPage';
 import { CPGIndustryPage } from './components/CPGIndustryPage';
 import { BostonLocationPage } from './components/BostonLocationPage';
+import { CorporatePresentationsPage } from './components/CorporatePresentationsPage';
+import { PitchDecksPage } from './components/PitchDecksPage';
+import { InvestorMemosPage } from './components/InvestorMemosPage';
+import { CIMsPage } from './components/CIMsPage';
+import { SalesDecksPage } from './components/SalesDecksPage';
+import { ManagementPresentationsPage } from './components/ManagementPresentationsPage';
 
 const theme: Theme = 'light';
 const container: Container = 'none';
@@ -35,6 +41,12 @@ function App() {
       <Routes>
         <Route path="/" element={<HeroLandingPage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/corporate-presentation" element={<CorporatePresentationsPage />} />
+        <Route path="/services/pitch-decks" element={<PitchDecksPage />} />
+        <Route path="/services/investor-memos" element={<InvestorMemosPage />} />
+        <Route path="/services/cims" element={<CIMsPage />} />
+        <Route path="/services/sales-decks" element={<SalesDecksPage />} />
+        <Route path="/services/management-presentations" element={<ManagementPresentationsPage />} />
         <Route path="/industries" element={<IndustriesPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/industries/pharma" element={<PharmaIndustryPage />} />
