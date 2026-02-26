@@ -367,10 +367,9 @@ export const BostonLocationPage = () => {
               color: COLORS.grayText,
               fontSize: isMobile ? '16px' : '20px',
               lineHeight: isMobile ? '24px' : '30px',
-              margin: 0,
               fontFamily: FONTS.inter,
               maxWidth: '600px',
-              margin: '0 auto'
+              textAlign: 'center'
             }}>
               Comprehensive financial communication services tailored for Boston's innovative ecosystem
             </p>
@@ -504,10 +503,9 @@ export const BostonLocationPage = () => {
               color: COLORS.grayText,
               fontSize: isMobile ? '16px' : '20px',
               lineHeight: isMobile ? '24px' : '30px',
-              margin: 0,
               fontFamily: FONTS.inter,
               maxWidth: '600px',
-              margin: '0 auto'
+              textAlign: 'center'
             }}>
               Expert financial communications across Boston's key industries
             </p>
@@ -623,10 +621,9 @@ export const BostonLocationPage = () => {
               color: COLORS.grayText,
               fontSize: isMobile ? '16px' : '20px',
               lineHeight: isMobile ? '24px' : '30px',
-              margin: 0,
               fontFamily: FONTS.inter,
               maxWidth: '600px',
-              margin: '0 auto'
+              textAlign: 'center'
             }}>
               Deep expertise in Boston's biotech and financial ecosystem
             </p>
@@ -737,8 +734,9 @@ export const BostonLocationPage = () => {
             lineHeight: isMobile ? '22px' : '26.6px',
             margin: 0,
             fontFamily: FONTS.inter,
-            maxWidth: '400px'
-          }}>
+              maxWidth: '600px',
+              textAlign: 'center'
+            }}>
             Let's discuss how we can help your Boston company communicate its value to investors.
           </p>
           <button style={{

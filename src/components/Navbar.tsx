@@ -19,14 +19,14 @@ const FONTS = {
 const industriesList = [
   { label: 'Pharmaceuticals', slug: 'pharma', isPage: true },
   { label: 'Biotechnology', slug: 'biotech', isPage: true },
-  { label: 'Private Equity', slug: 'private-equity' },
-  { label: 'Private Credit', slug: 'private-credit' },
-  { label: 'Venture Capital', slug: 'venture-capital' },
-  { label: 'Family Office', slug: 'family-office' },
-  { label: 'Digital Transformation', slug: 'digital-transformation' },
-  { label: 'Food & Beverages', slug: 'food-beverages' },
-  { label: 'SaaS', slug: 'saas' },
-  { label: 'CPG', slug: 'cpg' },
+  { label: 'Private Equity', slug: 'private-equity', isPage: true },
+  { label: 'Private Credit', slug: 'private-credit', isPage: true },
+  { label: 'Venture Capital', slug: 'venture-capital', isPage: true },
+  { label: 'Family Office', slug: 'family-office', isPage: true },
+  { label: 'Digital Transformation', slug: 'digital-transformation', isPage: true },
+  { label: 'Food & Beverages', slug: 'food-beverages', isPage: true },
+  { label: 'SaaS', slug: 'saas', isPage: true },
+  { label: 'CPG', slug: 'cpg', isPage: true },
 ];
 
 const servicesList = [
